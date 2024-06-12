@@ -1,0 +1,102 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Добро пожаловать в нашу компанию</h1>
+    <p class="lead">
+        Наша компания стремится к улучшению мотивации работы сотрудников. Мы предлагаем разнообразные услуги,
+        направленные на повышение эффективности и удовлетворенности сотрудников. Присоединяйтесь к нам и ощутите
+        положительные изменения в рабочем процессе.
+    </p>
+    <hr class="my-4">
+    <a href="{% url 'services' %}" class="btn btn-black btn-lg mr-2">Просмотреть услуги</a>
+    {% if not user.is_authenticated %}
+    <a href="{% url 'register' %}" class="btn btn-black">Зарегистрироваться</a>
+    {% endif %}
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Наши преимущества</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/12154/12154893.png" class="card-img-top img-fluid" alt="Преимущество 1" style="max-width: 512px;">
+                <div class="card-body">
+                    <h5 class="card-title">Высокая квалификация</h5>
+                    <p class="card-text">Наши сотрудники проходят регулярное обучение и сертификацию, что обеспечивает высокое качество услуг.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/10452/10452556.png" class="card-img-top img-fluid" alt="Преимущество 2" style="max-width: 512px;">
+                <div class="card-body">
+                    <h5 class="card-title">Индивидуальный подход</h5>
+                    <p class="card-text">Мы учитываем все пожелания наших клиентов и предлагаем индивидуальные решения для каждого.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/11489/11489846.png" class="card-img-top img-fluid" alt="Преимущество 3" style="max-width: 512px;">
+                <div class="card-body">
+                    <h5 class="card-title">Современные технологии</h5>
+                    <p class="card-text">Мы используем новейшие технологии и методики для достижения наилучших результатов.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-5 mb-4">Наши услуги</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/1924/1924237.png" class="card-img-top img-fluid" alt="Услуга 1" style="max-width: 512px;">
+                <div class="card-body">
+                    <h5 class="card-title">Консалтинг</h5>
+                    <p class="card-text">Профессиональные консультации по вопросам управления и оптимизации бизнес-процессов.</p>
+                    <a href="{% url 'services' %}" class="btn btn-black">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/10219/10219051.png" class="card-img-top img-fluid" alt="Услуга 2" style="max-width: 512px;">
+                <div class="card-body">
+                    <h5 class="card-title">Тренинги и семинары</h5>
+                    <p class="card-text">Организация и проведение тренингов и семинаров для повышения квалификации сотрудников.</p>
+                    <a href="{% url 'services' %}" class="btn btn-black">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/6567/6567028.png" class="card-img-top img-fluid" alt="Услуга 3" style="max-width: 512px;">
+                <div class="card-body">
+                    <h5 class="card-title">Тимбилдинг</h5>
+                    <p class="card-text">Организация мероприятий для улучшения командной работы и повышения мотивации сотрудников.</p>
+                    <a href="{% url 'services' %}" class="btn btn-black">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Отзывы наших клиентов</h2>
+        <div class="row">
+            {% for review in reviews %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.user.username }} о {{ review.service.name }}</h5>
+                        <p class="card-text">{{ review.content }}</p>
+                        <p class="card-text"><small class="text-muted">{{ review.created_at }}</small></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

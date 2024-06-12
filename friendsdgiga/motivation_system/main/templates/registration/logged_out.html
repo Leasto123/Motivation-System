@@ -1,0 +1,11 @@
+<!-- templates/registration/logged_out.html -->
+{% extends 'main/base.html' %}
+
+{% block title %}Вы вышли{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Вы успешно вышли из системы</h1>
+    <p><a href="{% url 'home' %}">Вернуться на главную страницу</a></p>
+</div>
+{% endblock %}
